@@ -1,1 +1,1 @@
-# ecom-demo-microservices
+# Demo Microservices - Ecommerce Platform
