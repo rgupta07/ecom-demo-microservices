@@ -1,0 +1,70 @@
+# .NET build artifacts
+bin/
+obj/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Visual Studio Code
+.vscode/
+
+# Rider
+.idea/
+*.sln.iml
+
+# ASP.NET Core secrets
+**/secrets.json
+
+# Docker
+*.pid
+docker-compose.override.yml
+.dockerignore
+
+# Logs
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# NuGet packages
+*.nupkg
+.nuget/
+
+# Test results
+TestResults/
+
+# Others
+*.vspscc
+*.vssscc
+_ReSharper*/
+
+# Ignore local environment files
+.env
+.env.*
+
+# Ignore migrations (if using EF Core)
+Migrations/
+
+# Ignore coverage reports
+coverage/
+*.coverage
+*.coveragexml
+
+# Ignore publish output
+publish/
+
+# Ignore node_modules (if using JS/TS)
+node_modules/
+
+# Ignore generated swagger files
+swagger/
+
+# Ignore generated files
+Generated_Code/
+
+# Ignore Visual Studio workspace files
+.vs/
