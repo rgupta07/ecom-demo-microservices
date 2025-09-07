@@ -3,8 +3,6 @@ using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using JasperFx;
 using HealthChecks.UI.Client;
 
-
-
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddMediatR(config =>
