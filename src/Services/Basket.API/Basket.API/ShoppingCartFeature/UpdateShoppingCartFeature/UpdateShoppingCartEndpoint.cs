@@ -1,9 +1,4 @@
-﻿using Basket.API.Models;
-using Carter;
-using Mapster;
-using MediatR;
-using Microsoft.AspNetCore.Mvc;
-
+﻿
 namespace Basket.API.ShoppingCartFeature.UpdateShoppingCartFeature
 {
 	public class UpdateShoppingCartEndpoint() : ICarterModule

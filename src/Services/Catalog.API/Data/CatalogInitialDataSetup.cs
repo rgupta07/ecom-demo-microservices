@@ -5,7 +5,7 @@ using Weasel.Postgresql.Tables.Partitioning;
 
 namespace Catalog.API.Data
 {
-	public class CatalogInitialData(ILogger<CatalogInitialData> logger) : IInitialData
+	public class CatalogInitialDataSetup(ILogger<CatalogInitialDataSetup> logger) : IInitialData
 	{
 		private const int SEED_COUNT = 100;
 		public async Task Populate(IDocumentStore store, CancellationToken cancellation)

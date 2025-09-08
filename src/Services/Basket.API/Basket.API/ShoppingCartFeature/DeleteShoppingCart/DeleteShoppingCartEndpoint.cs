@@ -1,7 +1,4 @@
-﻿using Carter;
-using Mapster;
-using MediatR;
-
+﻿
 namespace Basket.API.ShoppingCartFeature.DeleteShoppingCart
 {
 	public class DeleteShoppingCartEndpoint : ICarterModule

@@ -1,10 +1,4 @@
-﻿using Basket.API.Models;
-using Carter;
-using Mapster;
-using MediatR;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
-
+﻿
 namespace Basket.API.ShoppingCartFeature.GetShoppingCart
 {
 	public class GetShoppingCartEndpoint : ICarterModule
@@ -12,7 +6,7 @@ namespace Basket.API.ShoppingCartFeature.GetShoppingCart
 		public void AddRoutes(IEndpointRouteBuilder app)
 		{
 			app.MapGet("/basket/{userName}", async (ISender sender, string userName) =>
-			{
+			 {
 				var query = new GetShoppingCartQuery(userName);
 
 				var result = await sender.Send(query);

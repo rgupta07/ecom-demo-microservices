@@ -1,0 +1,14 @@
+﻿global using Carter;
+global using Marten;
+global using Mapster;
+global using MediatR;
+global using JasperFx;
+global using Basket.API.Data;
+global using FluentValidation;
+global using Basket.API.Models;
+global using BuildingBlocks.CQRS;
+global using Basket.API.Repository;
+global using Basket.API.Exceptions;
+global using Microsoft.AspNetCore.Mvc;
+global using BuildingBlocks.Behaviours;
+global using BuildingBlocks.Exceptions.Handler;

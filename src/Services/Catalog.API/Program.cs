@@ -19,7 +19,7 @@ builder.Services.AddMarten(opts =>
 });
 
 if(builder.Environment.IsDevelopment())
-	builder.Services.InitializeMartenWith<CatalogInitialData>();
+	builder.Services.InitializeMartenWith<CatalogInitialDataSetup>();
 
 builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly);
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));

@@ -1,8 +1,4 @@
-﻿using Basket.API.Models;
-using Basket.API.Repository;
-using BuildingBlocks.CQRS;
-using Marten;
-
+﻿
 namespace Basket.API.ShoppingCartFeature.GetShoppingCart
 {
 	public record GetShoppingCartQuery(string UserName): IQuery<GetShoppingCartResult>;
@@ -13,6 +9,14 @@ namespace Basket.API.ShoppingCartFeature.GetShoppingCart
 		public async Task<GetShoppingCartResult> Handle(GetShoppingCartQuery request, CancellationToken cancellationToken)
 		{
 			return await repository.GetShoppingCart(request.UserName);
+		}
+	}
+
+	public class GetShoppingCartQueryHandlerValidator : AbstractValidator<GetShoppingCartQuery>
+	{
+		public GetShoppingCartQueryHandlerValidator()
+		{
+			RuleFor(x => x.UserName).NotEmpty().WithMessage("UserName is required.");
 		}
 	}
 }

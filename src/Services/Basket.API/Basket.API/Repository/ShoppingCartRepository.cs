@@ -1,9 +1,7 @@
-﻿using Basket.API.Exceptions;
-using Basket.API.Models;
+﻿
 using Basket.API.ShoppingCartFeature.DeleteShoppingCart;
 using Basket.API.ShoppingCartFeature.GetShoppingCart;
 using Basket.API.ShoppingCartFeature.UpdateShoppingCartFeature;
-using Marten;
 
 namespace Basket.API.Repository
 {
@@ -19,7 +17,7 @@ namespace Basket.API.Repository
 				return new GetShoppingCartResult(result);
 			}
 
-			return new GetShoppingCartResult(new ShoppingCart(userName));
+			throw new CartNotFoundException(userName);
 		}
 
 		public async Task<UpdateShoppingCartResult> UpdateShoppingCart(ShoppingCart shoppingCart)
@@ -31,12 +29,13 @@ namespace Basket.API.Repository
 			{
 				existingCart.Items = shoppingCart.Items;
 				session.Update(existingCart);
-				await session.SaveChangesAsync();
-				
-				return new UpdateShoppingCartResult(true);
 			}
-
-			return new UpdateShoppingCartResult(false);
+			else
+			{
+				session.Store(shoppingCart);
+			}
+			await session.SaveChangesAsync();
+			return new UpdateShoppingCartResult(true);
 		}
 
 		public async Task<DeleteShoppingCartResult> DeleteShoppingCart(string userName)
@@ -50,10 +49,7 @@ namespace Basket.API.Repository
 				await session.SaveChangesAsync();
 				return new DeleteShoppingCartResult(true);
 			}
-			else
-			{
-				throw new CartNotFoundException(userName);
-			}
+			throw new CartNotFoundException(userName);
 		}
 	}
 }

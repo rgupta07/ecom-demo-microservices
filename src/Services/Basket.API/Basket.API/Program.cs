@@ -1,13 +1,5 @@
-using Basket.API.Models;
-using Basket.API.Repository;
-using BuildingBlocks.Behaviours;
-using BuildingBlocks.Exceptions.Handler;
-using Carter;
-using FluentValidation;
-using JasperFx;
-using Marten;
+using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
-using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -35,10 +27,13 @@ builder.Services.AddMarten(builder =>
 	builder.AutoCreateSchemaObjects = AutoCreate.All;
 }).UseLightweightSessions();
 
+if (builder.Environment.IsDevelopment())
+	builder.Services.InitializeMartenWith<BasketInitialDataSetup>();
+
 builder.Services.AddHealthChecks()
 	.AddNpgSql(configuration.GetConnectionString("BasketDBConnection")!,
 	name: "PostgreSQL",
-	tags: new[] { "ready" });
+	tags: ["ready"]);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -53,5 +48,13 @@ if (app.Environment.IsDevelopment())
 }
 
 app.MapCarter();
+
+app.UseExceptionHandler(opts => { });
+
+app.UseHealthChecks("/healthcheck",
+	new HealthCheckOptions()
+	{
+		ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+	});
 
 app.Run();

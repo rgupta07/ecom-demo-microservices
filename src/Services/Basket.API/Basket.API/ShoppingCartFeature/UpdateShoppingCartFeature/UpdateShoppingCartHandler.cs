@@ -1,9 +1,4 @@
-﻿using Basket.API.Exceptions;
-using Basket.API.Models;
-using Basket.API.Repository;
-using BuildingBlocks.CQRS;
-using System.Windows.Input;
-
+﻿
 namespace Basket.API.ShoppingCartFeature.UpdateShoppingCartFeature
 {
 	public record UpdateShoppingCartCommand(ShoppingCart cart) : ICommand<UpdateShoppingCartResult>;
@@ -20,6 +15,15 @@ namespace Basket.API.ShoppingCartFeature.UpdateShoppingCartFeature
 			}
 
 			throw new CartNotFoundException(command.cart.UserName);
+		}
+	}
+
+	public class UpdateShoppingCartHandlerValidator : AbstractValidator<UpdateShoppingCartCommand>
+	{
+		public UpdateShoppingCartHandlerValidator()
+		{
+			RuleFor(x => x.cart.UserName).NotEmpty().WithMessage("UserName is required.");
+			RuleFor(x => x.cart.Items).NotNull().WithMessage("Cart items cannot be null.");
 		}
 	}
 }
