@@ -12,6 +12,12 @@ builder.Services.AddCarter();
 builder.Services.AddValidatorsFromAssembly(assembly);
 
 builder.Services.AddScoped<IShopingCartRepository, ShoppingCartRepository>();
+builder.Services.Decorate<IShopingCartRepository, CachedShoppingCartRepository>();
+
+builder.Services.AddStackExchangeRedisCache(opts =>
+{
+	opts.Configuration = configuration.GetConnectionString("RedisCacheConnection");
+});
 
 builder.Services.AddMediatR(config =>
 {
@@ -32,7 +38,10 @@ if (builder.Environment.IsDevelopment())
 
 builder.Services.AddHealthChecks()
 	.AddNpgSql(configuration.GetConnectionString("BasketDBConnection")!,
-	name: "PostgreSQL",
+	name: "PostgreSQLConnection",
+	tags: ["ready"])
+	.AddRedis(configuration.GetConnectionString("RedisCacheConnection")!,
+	name: "RedisConnection",
 	tags: ["ready"]);
 
 builder.Services.AddEndpointsApiExplorer();
