@@ -1,3 +1,4 @@
+using Discount.gRPC.Protos;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
@@ -33,6 +34,16 @@ builder.Services.AddMarten(builder =>
 	builder.AutoCreateSchemaObjects = AutoCreate.All;
 }).UseLightweightSessions();
 
+builder.Services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>(o =>
+{
+	o.Address = new Uri(configuration.GetValue<string>("GrpcSettings:DiscountUrl")!);
+})
+.ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler
+{
+	// Return `true` to allow certificates that are untrusted/invalid
+	ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+});
+
 if (builder.Environment.IsDevelopment())
 	builder.Services.InitializeMartenWith<BasketInitialDataSetup>();
 
@@ -44,9 +55,11 @@ builder.Services.AddHealthChecks()
 	name: "RedisConnection",
 	tags: ["ready"]);
 
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
+
 
 var app = builder.Build();
   

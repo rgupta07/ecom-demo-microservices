@@ -2,13 +2,13 @@
 
 namespace Discount.gRPC.Utilities.Faker
 {
-	public class DiscountFaker: Faker<Coupon>
+	public class DiscountFaker : Faker<Coupon>
 	{
 		public DiscountFaker()
 		{
-			RuleFor(c => c.ProductName, f => f.Commerce.ProductName());
-			RuleFor(c => c.Description, f => f.Commerce.ProductAdjective());
-			RuleFor(c => c.DiscountAmount, f => decimal.Parse(f.Commerce.Price(1, 100)));
+			RuleFor(c => c.ProductName, (f, c) => f.Commerce.ProductName());
+			RuleFor(c => c.Description, (f, c) => f.Commerce.ProductDescription());
+			RuleFor(c => c.DiscountAmount, (f, c) => decimal.Parse(f.Commerce.Price(1, 100, 2)));
 		}
 	}
 }

@@ -19,7 +19,7 @@ builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 
 var app = builder.Build();
 
-//app.MigrateDatabase();
+app.MigrateDatabase();
 
 app.MapGrpcService<DiscountService>();
 
