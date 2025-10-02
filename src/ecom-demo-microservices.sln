@@ -21,15 +21,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Discount.gRPC", "Discount.g
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Discount.gRPC", "Services\Discount.gRPC\Discount.gRPC\Discount.gRPC.csproj", "{4261F4FA-0925-484B-A444-5559DC0FDC75}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ordering.API", "Ordering.API", "{DF9E2B84-EF2A-45F8-9AB2-2EB4B1958745}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ordering", "Ordering", "{DF9E2B84-EF2A-45F8-9AB2-2EB4B1958745}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ordering.API", "Services\Ordering.API\Ordering.API.csproj", "{FBC15D59-C3E3-4949-B16F-7C4CF8A234E7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ordering.API", "Services\Ordering\Ordering.API\Ordering.API.csproj", "{FBC15D59-C3E3-4949-B16F-7C4CF8A234E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ordering.Domain", "Services\Ordering.API\Ordering.Domain\Ordering.Domain.csproj", "{12EFC7DB-5E4B-4357-864B-3F588119FB1A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ordering.Domain", "Services\Ordering\Ordering.Domain\Ordering.Domain.csproj", "{12EFC7DB-5E4B-4357-864B-3F588119FB1A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ordering.Application", "Services\Ordering.API\Ordering.Application\Ordering.Application.csproj", "{5B522CC7-9D74-495B-ACBC-BBF7F96CD64D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ordering.Application", "Services\Ordering\Ordering.Application\Ordering.Application.csproj", "{5B522CC7-9D74-495B-ACBC-BBF7F96CD64D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ordering.Infrastructure", "Services\Ordering.API\Ordering.Infrastructure\Ordering.Infrastructure.csproj", "{C34AD15F-CC3F-4A5E-95A4-87A1F1B80B7A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ordering.Infrastructure", "Services\Ordering\Ordering.Infrastructure\Ordering.Infrastructure.csproj", "{C34AD15F-CC3F-4A5E-95A4-87A1F1B80B7A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
