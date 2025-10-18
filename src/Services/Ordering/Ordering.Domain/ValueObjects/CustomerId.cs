@@ -9,10 +9,11 @@ namespace Ordering.Domain.ValueObjects
 {
 	public record CustomerId
 	{
+		private CustomerId() { }
+
 		public Guid Value { get; }
-
 		private CustomerId(Guid customerId) => Value = customerId;
-
+		
 		public static CustomerId Of(Guid customerId)
 		{
 			Validate(customerId);

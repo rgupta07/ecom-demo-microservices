@@ -9,10 +9,11 @@ namespace Ordering.Domain.ValueObjects
 {
 	public class ProductId
 	{
+		private ProductId() { }
+
 		public Guid Value { get; }
-
 		private ProductId(Guid productId) => Value = productId;
-
+		
 		public static ProductId Of(Guid productId)
 		{
 			Validate(productId);

@@ -12,6 +12,8 @@ namespace Ordering.Domain.Entities
 	{
 		public string Name { get; private set; } = default!;
 		public decimal Price { get; private set; }
+
+		private Product() { }
 		private Product(ProductId id, string name, decimal price)
 		{
 			Id = id;

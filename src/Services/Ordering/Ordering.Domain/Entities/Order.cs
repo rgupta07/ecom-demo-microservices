@@ -22,6 +22,7 @@ public class Order : Aggregate<OrderId>
 		private set { }
 	}
 
+	private Order() { }
 
 	private Order(CustomerId customerId, OrderName orderName, Address shippingAddress, Address billingAddress, Payment payment)
 	{

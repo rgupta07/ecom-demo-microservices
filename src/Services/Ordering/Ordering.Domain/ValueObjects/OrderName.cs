@@ -13,6 +13,8 @@ namespace Ordering.Domain.ValueObjects
 
 		private OrderName(string orderName) => Value = orderName;
 
+		private OrderName() { }
+
 		public static OrderName Of(string orderName)
 		{
 			Validate(orderName);

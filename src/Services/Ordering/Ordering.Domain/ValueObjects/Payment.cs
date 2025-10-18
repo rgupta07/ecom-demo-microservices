@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ordering.Domain.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,13 +13,11 @@ namespace Ordering.Domain.ValueObjects
 		public string CardNumber { get; } = default!;
 		public string Expiration { get; } = default!;
 		public string CVV { get; } = default!;
-		public int PaymentMethod { get; } = default!;
+		public PaymentMethod PaymentMethod { get; } = default!;
 
-		protected Payment()
-		{
-		}
+		private Payment() { }
 
-		private Payment(string cardName, string cardNumber, string expiration, string cvv, int paymentMethod)
+		private Payment(string cardName, string cardNumber, string expiration, string cvv, PaymentMethod paymentMethod)
 		{
 			CardName = cardName;
 			CardNumber = cardNumber;
@@ -27,7 +26,7 @@ namespace Ordering.Domain.ValueObjects
 			PaymentMethod = paymentMethod;
 		}
 
-		public static Payment Of(string cardName, string cardNumber, string expiration, string cvv, int paymentMethod)
+		public static Payment Of(string cardName, string cardNumber, string expiration, string cvv, PaymentMethod paymentMethod)
 		{
 			Validate(cardName, cardNumber, cvv);
 

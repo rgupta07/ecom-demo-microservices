@@ -13,6 +13,8 @@ namespace Ordering.Domain.Entities
 		public string Name { get; private set; } = default!;
 		public string Email { get; private set; } = default!;
 
+		private Customer() { }
+
 		private Customer(CustomerId id, string name, string email)	
 		{
 			Id = id;

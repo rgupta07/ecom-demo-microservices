@@ -9,8 +9,9 @@ namespace Ordering.Domain.ValueObjects
 {
 	public record OrderItemId
 	{
-		public Guid Value { get; }
+		private OrderItemId() { }
 
+		public Guid Value { get; }
 		private OrderItemId(Guid orderItemId) => Value = orderItemId;
 
 		public static OrderItemId Of(Guid orderItemId)

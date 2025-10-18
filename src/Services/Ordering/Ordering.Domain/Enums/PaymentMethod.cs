@@ -4,13 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ordering.Domain.Enums
+namespace Ordering.Domain.Enums;
+public enum PaymentMethod
 {
-	public enum OrderStatus
-	{
-		Draft,
-		Pending,
-		Completed,
-		Cancelled
-	}
+	POS,
+	Online,
+	Netbanking
 }
