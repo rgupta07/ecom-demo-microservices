@@ -14,12 +14,12 @@ namespace BuildingBlocks.Behaviours
 
 			var results = await Task.WhenAll(validators.Select(x => x.ValidateAsync(context, cancellationToken)));
 
-			var failures = results.Where(r => r.Errors.Any()).SelectMany(r => r.Errors).ToList();
+			var failures = results.Where(r => r.Errors.Count != 0).SelectMany(r => r.Errors).ToList();
 
-			if (failures.Any())
+			if (failures.Count != 0)
 				throw new ValidationException(failures);
 
-			return await next();
+			return await next(cancellationToken);
 		}
 	}
 }

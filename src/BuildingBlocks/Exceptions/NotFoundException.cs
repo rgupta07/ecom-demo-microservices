@@ -11,6 +11,7 @@ namespace BuildingBlocks.Exceptions
 		public NotFoundException(): base() { }
 
 		public NotFoundException(string name, object key): base($"Entity \"{name}\"  ({key}) was not found.") { }
+		public NotFoundException(string name, object key, string selector): base($"Entity \"{name}\" was not found using {selector} - {key}.") { }
 
 	}
 }

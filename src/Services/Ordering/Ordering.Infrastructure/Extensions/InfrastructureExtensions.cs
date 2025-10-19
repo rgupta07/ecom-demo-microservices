@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
-using Ordering.Infrastructure.Data;
+﻿using Ordering.Infrastructure.Data;
 using Microsoft.Extensions.Configuration;
 using Ordering.Infrastructure.Interceptors;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+using Ordering.Application.Abstractions;
 
 namespace Ordering.Infrastructure.Extensions;
 public static class InfrastructureExtensions

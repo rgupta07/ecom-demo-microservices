@@ -10,4 +10,14 @@
     <ProjectReference Include="..\Ordering.Domain\Ordering.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Ordering\Commands\UpdateOrder\" />
+    <Folder Include="Ordering\Queries\GetAllOrders\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.21" />
+    <PackageReference Include="Microsoft.FeatureManagement" Version="4.3.0" />
+  </ItemGroup>
+
 </Project>
