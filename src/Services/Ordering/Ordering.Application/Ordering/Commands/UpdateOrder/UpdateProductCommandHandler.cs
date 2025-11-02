@@ -8,7 +8,9 @@ public class UpdateOrderCommandHandler(IApplicationDbContext _dbContext) : IComm
 {
 	public async Task<UpdateOrderResult> Handle(UpdateOrderCommand request, CancellationToken cancellationToken)
 	{
-		var order = await _dbContext.Orders.FindAsync(OrderId.Of(request.Order.Id), cancellationToken) ?? throw new OrderNotFoundException(request.Order.Id);
+		var order = await _dbContext.Orders
+			.FirstOrDefaultAsync(o => o.Id == OrderId.Of(request.Order.Id), cancellationToken) 
+			?? throw new OrderNotFoundException(request.Order.Id);
 
 		var updatedOrder = UpdateOrder(request.Order, order);
 
@@ -16,7 +18,7 @@ public class UpdateOrderCommandHandler(IApplicationDbContext _dbContext) : IComm
 
 		await _dbContext.SaveChangesAsync(cancellationToken);
 
-		return new UpdateOrderResult(updatedOrder.Id.Value);
+		return new UpdateOrderResult(true);
 	}
 	
 	private static Order UpdateOrder(OrderDto request, Order order)

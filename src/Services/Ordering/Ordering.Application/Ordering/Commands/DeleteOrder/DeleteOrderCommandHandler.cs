@@ -13,7 +13,7 @@ public class DeleteOrderCommandHandler(IApplicationDbContext _dbContext) : IComm
 
 		await _dbContext.SaveChangesAsync(cancellationToken);
 
-		return new DeleteOrderResult();
+		return new DeleteOrderResult(true);
 	}
 }
 

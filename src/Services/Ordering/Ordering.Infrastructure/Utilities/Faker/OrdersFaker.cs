@@ -46,8 +46,13 @@ public class OrdersFaker: Faker<Order>
 				orderItems.Add(orderItem);
 			}
 
-			var order = Order.Create(customerId, orderName, shippingAddress, billingAddress, payment, orderItems);
-			
+			var order = Order.Create(customerId, orderName, shippingAddress, billingAddress, payment);
+
+			foreach (var item in orderItems)
+			{
+				order.Add(item.ProductId, item.Quantity, item.Price);
+			}
+
 			// Set the status if needed (after creation)
 			var status = f.PickRandom<OrderStatus>();
 			if (status != OrderStatus.Pending)

@@ -1,7 +1,6 @@
-﻿
-using BuildingBlocks.Pagination;
+﻿namespace Ordering.Application.Ordering.Queries.GetOrdersByCustomerId;
 
-namespace Ordering.Application.Ordering.Queries.GetOrdersByCustomerId;
-public record GetOrderByCustomerIdQuery(Guid CustomerId): PaginationRequest, IQuery<GetOrderByCustomerIdResult>;
+public record GetOrderByCustomerIdQuery(Guid CustomerId, int PageNumber, int PageSize)
+	: PaginationRequest(PageNumber, PageSize), IQuery<GetOrderByCustomerIdResult>;
 
-public record GetOrderByCustomerIdResult(PaginatedResult<OrderDto> result);
+public record GetOrderByCustomerIdResult(PaginatedResult<OrderDto> Result);

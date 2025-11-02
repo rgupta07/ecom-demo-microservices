@@ -1,9 +1,3 @@
-using FluentValidation;
-using Mapster;
-using Ordering.Application.DTOs;
-using Ordering.Domain.Entities;
-using Ordering.Domain.ValueObjects;
-
 namespace Ordering.Application.Ordering.Commands.CreateOrder;
 
 public class CreateOrderCommandHandler(IApplicationDbContext _dbContext) : ICommandHandler<CreateOrderCommand, CreateOrderResult>
@@ -21,21 +15,46 @@ public class CreateOrderCommandHandler(IApplicationDbContext _dbContext) : IComm
 
 	private static Order CreateOrder(OrderDto request)
 	{
-		var customerId = CustomerId.Of(request.CustomerId);
-		var orderName = OrderName.Of(request.OrderName);
-		var shippingAddress = Address.Of(request.ShippingAddress.FirstName, request.ShippingAddress.LastName, request.ShippingAddress.EmailAddress, request.ShippingAddress.AddressLine, request.ShippingAddress.Country, request.ShippingAddress.State, request.ShippingAddress.ZipCode);
-		var billingAddress = Address.Of(request.BillingAddress.FirstName, request.BillingAddress.LastName, request.BillingAddress.EmailAddress, request.BillingAddress.AddressLine, request.BillingAddress.Country, request.BillingAddress.State, request.BillingAddress.ZipCode);
-		var payment = Payment.Of(request.Payment.CardName, request.Payment.CardNumber, request.Payment.Expiration, request.Payment.Cvv, request.Payment.PaymentMethod);
-		var orderItems = request.OrderItems
-			.Select(oi =>
-				OrderItem.Create(
-					OrderId.Of(oi.OrderId),
-					ProductId.Of(oi.ProductId),
-					oi.Quantity,
-					oi.Price)
-			).ToList();
+		var shippingAddressDto = request.ShippingAddress;
+		var billingAddressDto = request.BillingAddress;
+		var paymentDto = request.Payment;
 
-		var order = Order.Create(customerId, orderName, shippingAddress, billingAddress, payment, orderItems);
+		var customerId = CustomerId.Of(request.CustomerId);
+
+		var orderName = OrderName.Of(request.OrderName);
+
+		var shippingAddress = Address.Of(
+			shippingAddressDto.FirstName, 
+			shippingAddressDto.LastName, 
+			shippingAddressDto.EmailAddress,
+			shippingAddressDto.AddressLine,
+			shippingAddressDto.Country, 
+			shippingAddressDto.State,
+			shippingAddressDto.ZipCode);
+
+		var billingAddress = Address.Of(
+			billingAddressDto.FirstName, 
+			billingAddressDto.LastName, 
+			billingAddressDto.EmailAddress, 
+			billingAddressDto.AddressLine, 
+			billingAddressDto.Country, 
+			billingAddressDto.State,
+			billingAddressDto.ZipCode);
+
+		var payment = Payment.Of(
+			paymentDto.CardName, 
+			paymentDto.CardNumber, 
+			paymentDto.Expiration, 
+			paymentDto.Cvv,
+			paymentDto.PaymentMethod);
+
+		var order = Order.Create(customerId, orderName, shippingAddress, billingAddress, payment);
+
+		foreach(var orderItemDto in request.OrderItems)
+		{
+			var productId = ProductId.Of(orderItemDto.ProductId);
+			order.Add(productId, orderItemDto.Quantity, orderItemDto.Price);
+		}
 
 		return order;
 	}
@@ -45,6 +64,9 @@ public class CreateOrderCommandHandlerValidator : AbstractValidator<CreateOrderC
 {
 	public CreateOrderCommandHandlerValidator()
 	{
+		RuleFor(x => x)
+			.NotNull().WithMessage("Order cannot be null");
+
 		RuleFor(x => x.Order.CustomerId)
 			.NotNull().WithMessage("CustomerId cannot be null!");
 		

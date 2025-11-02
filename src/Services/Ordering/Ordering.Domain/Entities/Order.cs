@@ -34,13 +34,11 @@ public class Order : Aggregate<OrderId>
 		Payment = payment;
 	}
 
-	public static Order Create(CustomerId customerId, OrderName orderName, Address shippingAddress, Address billingAddress, Payment payment, IList<OrderItem> orderItems)
+	public static Order Create(CustomerId customerId, OrderName orderName, Address shippingAddress, Address billingAddress, Payment payment)
 	{
-		Validate(customerId, orderName, shippingAddress, billingAddress, payment, orderItems);
+		Validate(customerId, orderName, shippingAddress, billingAddress, payment);
 		
 		var order = new Order(customerId, orderName, shippingAddress, billingAddress, payment);
-
-		order._orderItems.AddRange(orderItems);
 
 		order.AddDomainEvent(new OrderCreatedEvent(order));
 
@@ -77,16 +75,12 @@ public class Order : Aggregate<OrderId>
 		}
 	}
 
-	private static void Validate(CustomerId customerId, OrderName orderName, Address shippingAddress, Address billingAddress, Payment payment, IList<OrderItem> orderItems)
+	private static void Validate(CustomerId customerId, OrderName orderName, Address shippingAddress, Address billingAddress, Payment payment)
 	{
 		ArgumentNullException.ThrowIfNull(customerId);
 		ArgumentNullException.ThrowIfNull(orderName);
 		ArgumentNullException.ThrowIfNull(shippingAddress);
 		ArgumentNullException.ThrowIfNull(billingAddress);
 		ArgumentNullException.ThrowIfNull(payment);
-		if (orderItems is null || !orderItems.Any())
-		{
-			throw new ArgumentException("Order must have at least one order item.", nameof(orderItems));
-		}
 	}
 }

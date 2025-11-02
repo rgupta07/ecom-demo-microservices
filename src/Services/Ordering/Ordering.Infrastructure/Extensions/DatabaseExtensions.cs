@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Ordering.Infrastructure.Data;
 using Microsoft.Extensions.DependencyInjection;
-using Ordering.Infrastructure.Data.Setup;
 using Ordering.Infrastructure.Utilities.Faker;
 
 
