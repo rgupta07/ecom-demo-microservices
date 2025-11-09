@@ -25,11 +25,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Protobuf Include="Protos\dicount.proto" GrpcServices="Server" />
+    <ProjectReference Include="..\..\..\BuildingBlocks\BuildingBlocks\BuildingBlocks.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\BuildingBlocks\BuildingBlocks.csproj" />
+    <Protobuf Include="Protos\dicount.proto" GrpcServices="Server" />
   </ItemGroup>
 
 </Project>

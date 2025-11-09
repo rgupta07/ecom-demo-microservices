@@ -6,8 +6,7 @@ namespace Basket.API.Models
 	{
 		[Identity]
 		public string UserName { get; set; }
-		public List<ShoppingCartItem> Items { get; set; } = new List<ShoppingCartItem>();
-		public ShoppingCart() { }
+		public List<ShoppingCartItem> Items { get; set; } = [];
 		public ShoppingCart(string username)
 		{
 			UserName = username;

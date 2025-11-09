@@ -1,3 +1,5 @@
+using Basket.API.Extensions;
+using BuildingBlocks.Messaging.Extensions;
 using Discount.gRPC.Protos;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
@@ -7,42 +9,9 @@ var builder = WebApplication.CreateBuilder(args);
 var assembly = typeof(Program).Assembly;
 var configuration = builder.Configuration;
 
-// Add Services to the container
-builder.Services.AddCarter();
-
-builder.Services.AddValidatorsFromAssembly(assembly);
-
-builder.Services.AddScoped<IShopingCartRepository, ShoppingCartRepository>();
-builder.Services.Decorate<IShopingCartRepository, CachedShoppingCartRepository>();
-
-builder.Services.AddStackExchangeRedisCache(opts =>
-{
-	opts.Configuration = configuration.GetConnectionString("RedisCacheConnection");
-});
-
-builder.Services.AddMediatR(config =>
-{
-	config.RegisterServicesFromAssembly(assembly);
-	config.AddOpenBehavior(typeof(ValidationBehaviour<,>));
-	config.AddOpenBehavior(typeof(LoggingBehaviour<,>));
-});
-
-builder.Services.AddMarten(builder =>
-{
-	builder.Connection(configuration.GetConnectionString("BasketDBConnection")!);
-	builder.Schema.For<ShoppingCart>().Identity(x => x.UserName);
-	builder.AutoCreateSchemaObjects = AutoCreate.All;
-}).UseLightweightSessions();
-
-builder.Services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>(o =>
-{
-	o.Address = new Uri(configuration.GetValue<string>("GrpcSettings:DiscountUrl")!);
-})
-.ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler
-{
-	// Return `true` to allow certificates that are untrusted/invalid
-	ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
-});
+builder.Services
+	.AddApiServices(configuration, assembly)
+	.AddMapping();
 
 if (builder.Environment.IsDevelopment())
 	builder.Services.InitializeMartenWith<BasketInitialDataSetup>();
