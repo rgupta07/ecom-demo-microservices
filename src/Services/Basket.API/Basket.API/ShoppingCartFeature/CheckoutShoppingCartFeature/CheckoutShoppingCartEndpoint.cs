@@ -2,7 +2,7 @@
 
 namespace Basket.API.ShoppingCartFeature.CheckoutShoppingCartFeature
 {
-	public record CheckoutShoppingCartRequest(ShoppingCartCheckoutDto CartCheckoutDto);
+	public record CheckoutShoppingCartRequest(ShoppingCartCheckoutDto ShoppingCart);
 	public record CheckoutShoppingCartResponse(bool IsSuccess);
 	public class CheckoutShoppingCartEndpoint : ICarterModule
 	{

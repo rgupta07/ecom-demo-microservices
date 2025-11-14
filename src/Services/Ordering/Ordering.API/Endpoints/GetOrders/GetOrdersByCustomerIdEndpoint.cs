@@ -1,4 +1,5 @@
-﻿using Ordering.Application.Ordering.Queries.GetOrdersByCustomerId;
+﻿using BuildingBlocks.Pagination;
+using Ordering.Application.Ordering.Queries.GetOrdersByCustomerId;
 
 namespace Ordering.API.Endpoints.GetOrders;
 

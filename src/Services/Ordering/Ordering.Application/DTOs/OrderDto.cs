@@ -1,7 +1,7 @@
 ﻿using Ordering.Domain.Enums;
 
 namespace Ordering.Application.DTOs;
-public record	OrderDto(
+public record OrderDto(
 	Guid Id,
 	Guid CustomerId,
 	string OrderName,

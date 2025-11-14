@@ -1,4 +1,4 @@
-﻿
+﻿	
 namespace Basket.API.ShoppingCartFeature.GetShoppingCart
 {
 	public class GetShoppingCartEndpoint : ICarterModule

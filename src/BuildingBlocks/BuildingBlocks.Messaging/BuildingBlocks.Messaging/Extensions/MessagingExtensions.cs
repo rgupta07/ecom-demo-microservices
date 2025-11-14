@@ -19,7 +19,7 @@ namespace BuildingBlocks.Messaging.Extensions
 
 				config.UsingRabbitMq((context, configurator) =>
 				{
-					configurator.Host(new Uri(configuration["MessageBroker: Host"]!), h =>
+					configurator.Host(new Uri(configuration["MessageBroker:Host"]!), h =>
 					{
 						h.Username(configuration["MessageBroker:Username"]);
 						h.Password(configuration["MessageBroker:Password"]);

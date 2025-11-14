@@ -1,6 +1,4 @@
 using Basket.API.Extensions;
-using BuildingBlocks.Messaging.Extensions;
-using Discount.gRPC.Protos;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
